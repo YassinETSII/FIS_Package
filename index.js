@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var DataStore = require('nedb')
-//nedb is for database purposes
 
 var port = (process.env.PORT || 3000);
 var BASE_API_PATH = "/api/v1";
@@ -22,7 +21,7 @@ app.get("/", (req, res) => {
     res.send("<html><body><h1>Shall we look up for your packages?</h1></body></html>");
 });
 
-//In package to obtain all the packages we execute the next request
+//In order to obtain all the packages we execute the next request
 app.get(BASE_API_PATH + "/packages", (req, res) => {
     console.log(Date() + " - GET /packages");
 
@@ -40,12 +39,31 @@ app.get(BASE_API_PATH + "/packages", (req, res) => {
     });
 });
 
-//In package to crate an package we execute the next request
+//In order to create a package we execute the next request
 app.post(BASE_API_PATH + "/packages", (req, res) => {
     console.log(Date() + " - POST /packages");
     var package = req.body;
     db.insert(package, (err) => {
         if (err) {
+            console.log(Date() + " - " + err);
+            res.sendStatus(500);
+        } else {
+            res.sendStatus(201);
+        }
+    });
+});
+
+//In order to update a package we execute the next request
+app.put(BASE_API_PATH + "/packages/:id",
+    (req,res) => {
+        console.log(Date() + " - PUT /packages/" + req.params.id);
+        db.update({"_id":req.params.id}, 
+        {$inc:{code: -req.body.code},
+        $set:{quantity: req.body.quantity}
+        $set:{product: req.body.product}
+        $set:{deliveryDate: req.body.deliveryDate}
+        $set:{order: req.body.order}}, (err) => {
+            if (err) {
             console.log(Date() + " - " + err);
             res.sendStatus(500);
         } else {
