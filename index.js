@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var DataStore = require('nedb')
+//nedb is for database purposes
 
 var port = (process.env.PORT || 3000);
 var BASE_API_PATH = "/api/v1";
