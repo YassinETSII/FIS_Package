@@ -4,7 +4,7 @@ var DataStore = require('nedb')
 
 var port = (process.env.PORT || 3000);
 var BASE_API_PATH = "/api/v1";
-var DB_FILE_NAME = __dirname + "/orders.json";
+var DB_FILE_NAME = __dirname + "/packages.json";
 
 console.log("Starting API server...");
 
@@ -18,32 +18,32 @@ var db = new DataStore({
 });
 
 app.get("/", (req, res) => {
-    res.send("<html><body><h1>Shall we look up for your orders?</h1></body></html>");
+    res.send("<html><body><h1>Shall we look up for your packages?</h1></body></html>");
 });
 
-//In order to obtain all the orders we execute the next request
-app.get(BASE_API_PATH + "/orders", (req, res) => {
-    console.log(Date() + " - GET /orders");
+//In package to obtain all the packages we execute the next request
+app.get(BASE_API_PATH + "/packages", (req, res) => {
+    console.log(Date() + " - GET /packages");
 
-    db.find({}, (err, orders) => {
+    db.find({}, (err, packages) => {
         if (err) {
             console.log(Date() + " - " + err);
             res.sendStatus(500);
         } else {
-            res.send(orders.map((order) => {
-                delete order._id;
-                return order;
+            res.send(packages.map((package) => {
+                delete package._id;
+                return package;
                 res.sendStatus(200);
             }));
         }
     });
 });
 
-//In order to crate an order we execute the next request
-app.post(BASE_API_PATH + "/orders", (req, res) => {
-    console.log(Date() + " - POST /orders");
-    var order = req.body;
-    db.insert(order, (err) => {
+//In package to crate an package we execute the next request
+app.post(BASE_API_PATH + "/packages", (req, res) => {
+    console.log(Date() + " - POST /packages");
+    var package = req.body;
+    db.insert(package, (err) => {
         if (err) {
             console.log(Date() + " - " + err);
             res.sendStatus(500);
