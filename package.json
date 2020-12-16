@@ -1,5 +1,5 @@
 {
-  "name": "orders",
+  "name": "packages",
   "version": "1.0.0",
   "description": "Orders API",
   "main": "index.js",
