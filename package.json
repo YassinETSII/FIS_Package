@@ -1,0 +1,21 @@
+{
+  "name": "orders",
+  "version": "1.0.0",
+  "description": "Orders API",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YassinETSII/FIS_Pedido.git"
+  },
+  "homepage": "https://github.com/YassinETSII/FIS_Pedido",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yassin&Belen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  }
+}
